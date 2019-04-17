@@ -1,0 +1,27 @@
+{
+  "name": "cli-chat-readline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "dependencies": {
+    "ansi-color": "^0.2.1",
+    "readline": "^1.3.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amkurian/cli-chat-readline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amkurian/cli-chat-readline/issues"
+  },
+  "homepage": "https://github.com/amkurian/cli-chat-readline#readme"
+}

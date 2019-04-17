@@ -14,6 +14,10 @@ var rl = readline.createInterface(process.stdin, process.stdout);
 // var msg2 = "hello";
 // socket2.emit('foo', msg2);
 
+socket.on('updatechat', function (username, data) {
+  console_out(username + data);
+});
+
 socket.on('message', function (data) {
     var leader;
     if (data.type == 'chat' && data.nick != nick) {
@@ -35,8 +39,11 @@ socket.on('message', function (data) {
 rl.question("Please enter a nickname: ", function(name) {
     nick = name;
     var msg = nick + " has joined the chat";
-    socket.emit('foo', msg);
-    rl.prompt(true);
+    rl.question("Please enter a room: ", function(room) {
+      var msg = room;
+      socket.emit('adduser', nick, msg);
+      rl.prompt(true);
+    });
 });
 
 
@@ -61,14 +68,20 @@ function console_out(msg) {
 }
 
 function chat_command(cmd, arg) {
+      console.log(cmd)
     switch (cmd) {
-
       case 'nick':
           var notice = nick + " changed their name to " + arg;
           nick = arg;
           socket.emit('send', { type: 'notice', message: notice });
           break;
-
+      case 'room':
+           rl.question("Please enter a room: ", function(room) {
+              var msg = room;
+              socket.emit('adduser', nick, msg);
+              rl.prompt(true);
+            });
+           break;
       case 'msg':
           var to = arg.match(/[a-zA-Z]+\b/)[0];
           var message = arg.substr(to.length, arg.length);
